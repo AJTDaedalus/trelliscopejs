@@ -306,7 +306,7 @@ get_cog_info <- function(x, inputs = NULL) {
 
   tmp <- lapply(seq_len(nrow(cog_info)), function(i) {
     res <- as.list(cog_info[i, ])
-    if (res$type == "factor" && length(unique(x[[res$name]])) <= 5000) {
+    if (res$type == "factor" && length(unique(x[[res$name]])) <= 50000) {
       res$levels <- unique(x[[res$name]])
       res$levels[is.na(res$levels)] <- "NA"
     }
@@ -339,7 +339,7 @@ get_cog_info <- function(x, inputs = NULL) {
 #' @importFrom graphics hist
 #' @importFrom DistributionUtils skewness
 #' @importFrom grDevices nclass.Sturges
-get_cog_distributions <- function(cogdf, cat_cutoff = 5000) {
+get_cog_distributions <- function(cogdf, cat_cutoff = 50000) {
   cog_distns <- lapply(cogdf, function(x) {
 
     type <- attr(x, "cog_attrs")$type
